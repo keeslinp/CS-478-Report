@@ -66,6 +66,22 @@ Finally, we collected tier information and individual character rankings and tie
   \item And a collection of other tier lists (including lists made by professional players) published by IGN: https://www.ign.com/wikis/super-smash-bros-ultimate/Tier\_Lists 
 \end{itemize}
 
+\subsection{The Dataset}
+ The data that we are using is the damage output of each character’s movesets. Each of the characters has roughly the same set of moves. This allows us to compare categories of attacks across the different characters. An important step in this comparison is to preprocess the data so that they are uniformly measurable. For example, some characters perform multiple successive attacks for the same player input. It is important to combine those attacks together so that it can be compared to another character with only one attack for that player input.
+Our current dataset consists of 133 training instances, the rosters from games 1-4, with 42 attributes per instance, and one class label--the character’s predicted tier. The test set, comprised of the roster of Super Smash Brothers Ultimate, will contain 72 instances, for a combined total of 205 instances. There is a combination of continuous and nominal data. 
+The labels were created from standardizing the individually collected tier and ranking lists, averaging together the standardized scores for each instance, re-standardizing the averaged values to retain a standard deviation of one, and then finally discretizing the values into 6 even width bins to represent a universal standard tier list: S (Superior), A, B, C, D, and F.
+
+The 42 features are: 
+Weight (nominal), Archetype(nominal), Recovery(nominal), Jab(continuous), Jab Type(nominal), FTilt(continuous), FTilt Type(nominal), UTilt(continuous), UTilt Type(nominal), DTilt(continuous), DTilt Type(continuous), Dash Attack(continuous), Dash Attack Type(nominal), FSmash(continuous), FSmash Type(nominal), USmash(continuous), USmash Type(nominal), DSmash(continuous), DSmash Type(nominal), NAir(continuous), Nair Type(nominal), Fair(continuous), Fair Type(nominal), BAir(continuous), BAir Type(nominal), UAir(continuous), UAir Type(nominal), Dair(continuous), DAir type(nominal), FThrow(continuous), BThrow(continuous), UThrow(continuous), DThrow(continuous), NeutB(continuous), NeutB Type(nominal), SideB(continuous), SideB Type(nominal), UpB(continuous), UpB Type(nominal), DownB(continuous), DownB Type(nominal), Tier.    
+\linebreak
+Actual Instance: Mario
+med, hybrid, good, 8, melee, 13, melee, 10, melee,12, melee, 11, melee, 17, melee, 19, melee, 17, melee, 12.5, melee, 13, melee, 13, melee, 10.5, melee,  4,  melee, 12, 26, 19, 19, 7, ranged, 7, ranged, 15, melee, 14, melee, B.
+Because the data is so rich in attributes and attribute values, we’ve attached a reference to our in-progress dataset  and the tier information to give you a better idea of what we’ve actually collected:
+\begin{itemize}
+  \item Attributes: \url(https://docs.google.com/spreadsheets/d/103elr0mhpr14yhiLLib4\_KinrFvMXrBGhfcc1fdAJjE/edit?usp=sharing)
+  \item Tiers: \url(https://docs.google.com/spreadsheets/d/18\_zleVDd54rsXNylzEztfFuTKHLIQ6wrmeXgQ1AGhSc/edit?usp=sharing)
+\end{itemize}
+Note that, for most classification problems, having only 133 training instances with so many attributes for each instance would be problematic. However, the problem we’re solving is unique in that the universal set of instances is described in full with the 205 characters across all games (including Ultimate). And with how unique each character is, the more detail we can capture in each instance, the better. Thus the need for a somewhat larger set of attributes and possible attribute values. 
 
 \section{Methods}
 
