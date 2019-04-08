@@ -109,9 +109,10 @@ k & Silhouette Score\\
 10 & 0.07561\\
 15 & 0.10935\\
 \bottomrule
+\end{tabular}
 \end{center}
 
-Suprisingly, our K-Means model performed poorly, as evident by the Silhouette scores close to zero.
+Surprisingly, our K-Means model performed poorly, as evident by the Silhouette scores close to zero.
 These low scores indicate a weak total clustering, and that most instances fell on the border of two clusters.
 
 \subsection{MLP}
@@ -136,18 +137,19 @@ Conclusions, insights
 
 \section{Future Work}
 
-As our primary difficulty in solving this problem was our data, it would be worthwile to spend more time on refining our dataset.
+As our primary difficulty in solving this problem was our data, it would be worthwhile to spend more time on refining our dataset.
 It is possible that including more detailed data, such as launch and frame data for each attack, would produce more accurate results.
 Another possible improvement would be the use of different models.
 Ensembles of different learning models or of the same learning models with different hyperparameters might produce more accurate results.
-Deep learning might be able to learn the complicated, higher-order relations between character attack types and damase, as well as how raw data,
+Deep learning might be able to learn the complicated, higher-order relations between character attack types and damage, as well as how raw data,
 such as speed and weight, affect a character's ranking.
 
 \appendix
 
-\section{References}
-
-Cite Smash wiki
+\begin{thebibliography}{1}
+\bibitem{SmashWiki}
+"Smashwiki". textit{Smashwiki}, 2019, https://www.ssbwiki.com/. Accessed Feb 2019.
+\end{thebibliography}
 
 \end{document}
 
