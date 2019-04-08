@@ -85,8 +85,35 @@ Note that, for most classification problems, having only 133 training instances 
 
 \section{Methods}
 
+Since there are many different machine learning models that each perform differently on a given dataset, we used a variety of different models to find out which one performed the best on our data.
+
+\subsection{Decision Tree}
 \subsection{KNN}
 \subsection{K-Means}
+
+Because K-Means groups similar instances into clusters, it seemed like the oerfect model to create a group of character rankings.
+Before using this model, we decided upon the k value, that is to say the number of clusters the model will produce.
+Most Super Smash Brothers tier lists contain six tiers, which act as clusters of characters that perform the same in tournament settings.
+As such, we decided to use k=6 as a baseline of our clustering, as this would emulate a novel tier list.
+We also tested k=10 and k=15, but did not test any higher values because the model would begin to create clusters with only one character, which is not statistically significant for this problem.
+While there are many performance metrics for K-Means, we used Silhouette scoring as our primary accuracy metric.
+Because Silhouette scoring measures the ratio of dissimilarity between an instance and members of the nearest cluster over the dissimilarity of the instance compared to members of its same cluster, a Silhouette score close to one is desired.
+The following table includes the total Silhouette score for our tested k values.
+
+\begin{center}
+\begin{tabular}{c c}
+\toprule
+k & Silhouette Score\\
+\midrule
+6 & 0.07394\\
+10 & 0.07561\\
+15 & 0.10935\\
+\bottomrule
+\end{center}
+
+Suprisingly, our K-Means model performed poorly, as evident by the Silhouette scores close to zero.
+These low scores indicate a weak total clustering, and that most instances fell on the border of two clusters.
+
 \subsection{MLP}
 
 The features used to solve the problem and details on how you
@@ -109,7 +136,12 @@ Conclusions, insights
 
 \section{Future Work}
 
-future directions you would take if time permitted
+As our primary difficulty in solving this problem was our data, it would be worthwile to spend more time on refining our dataset.
+It is possible that including more detailed data, such as launch and frame data for each attack, would produce more accurate results.
+Another possible improvement would be the use of different models.
+Ensembles of different learning models or of the same learning models with different hyperparameters might produce more accurate results.
+Deep learning might be able to learn the complicated, higher-order relations between character attack types and damase, as well as how raw data,
+such as speed and weight, affect a character's ranking.
 
 \appendix
 
