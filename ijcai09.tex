@@ -9,6 +9,7 @@
 \documentclass{article}
 % The file ijcai09.sty is the style file for IJCAI-09 (same as ijcai07.sty).
 \usepackage{ijcai09}
+\usepackage{booktabs}
 
 % Use the postscript times font!
 \usepackage{times}
@@ -49,23 +50,25 @@ Brigham Young University}
 \maketitle
 
 \begin{abstract}
-  Your abstract should concisely answer the following three questions: 1) what problem are you addressing? 2) what approach are you taking to solve the problem? 3) what are your results?
+This paper seeks to explore the ability of machine learning models to predict the efficacy of different Super Smash Bros. characters across the different generations of games in the franchise. To date there are 5 generations of the game. Across all of the generations there are consistent attributes that allow comparison between different characters no matter the generation from which they originate. The newest generation of this game, Smash Ultimate, is new enough that players have not settled upon consistent rankings for the different characters. As such our goal is to predict those rankings by evaluating the attributes which were found to be significant features in previous generations. The different models which were evaluated where a decision tree, K nearest neighbors, and multi-layer perceptrons. Of these models, the MLP was found to be the most effective, managing an accuracy of
+~80\%. %TODO: put the real value
+For further exploration, an unsupervised clustering algorithm was also run on the characters to help identify trends and interesting relationships.
 \end{abstract}
 
 \section{Introduction}
 \subsection{Problem Description}
 The Super Smash Brothers series maintains a strong presence in the esports community and is praised for its large, diverse roster of characters. Professional players and amateurs alike are constantly creating lists of character rankings to determine which character would perform the best in a tournament setting. A character’s rank represents the relative advantage of using one character over any other in a fight of two equally matched players, and a character tier is a grouping of characters who are ranked similarly, usually listed in letter grades. We aim to run different machine learning algorithms on the rankings and tiers of the 133 characters in previous Super Smash Brothers games, then use the best learned model on the 72 characters in the sequel, Super Smash Brothers Ultimate to predict what their rankings should be. In the future, we will compare our machine-learned rankings with the official rankings when the game stops receiving updates.
 \subsection{Data Sources}
-The bulk of our data is retrieved from the Super Smash Brothers wiki \url(www.ssbwiki.com). This is a community driven database for all of the Super Smash Brothers games. Another source of information that we’re hoping to consider comes from SmashBoard user KuroganeHammer who is the curator of a fan-made collection of more in-depth information for the characters \url(http://kuroganehammer.com). For our initial tests we have chosen not to include this data because it proved to be very difficult to unify across characters. There is also a lot of missing data, especially in the newest generation of the game.
+The bulk of our data is retrieved from the Super Smash Brothers wiki \url{www.ssbwiki.com}. This is a community driven database for all of the Super Smash Brothers games. Another source of information that we’re hoping to consider comes from SmashBoard user KuroganeHammer who is the curator of a fan-made collection of more in-depth information for the characters \url{http://kuroganehammer.com}. For our initial tests we have chosen not to include this data because it proved to be very difficult to unify across characters. There is also a lot of missing data, especially in the newest generation of the game.
 For some of the attributes, we wanted to incorporate information that was not purely measurable in the game, such as character archetype. For this we had to rely on our own knowledge of the games and experiments conducted by our team members.
 Finally, we collected tier information and individual character rankings and tier lists from the following sources to use as potential class labels:
 \begin{itemize}
-  \item SmashBoards: \\ \url{https://smashboards.com/threads/4br-smash-for-wii-u-tier-list-v4.452109/}
-  \item SmashBackroom (via SSBwiki): \\ \url{https://www.ssbwiki.com/List\_of\_SSB4\_tier\_lists\_(NTSC)}
-  \item RankedBoost: \\ \url{https://rankedboost.com/ssb4-tier-list/}
-  \item HTC eSports: \\ \url{https://esports.htc.com/articles/esports-tier-list}
-  \item And a collection of other tier lists (including lists made by professional players) published by IGN: \\ \url{https://www.ign.com/wikis/super-smash-bros-ultimate/Tier\_Lists}
-\end{itemize}
+  \item\href{https://smashboards.com/threads/4br-smash-for-wii-u-tier-list-v4.452109/}{SmashBoards}
+  \item\href{https://www.ssbwiki.com/List\_of\_SSB4\_tier\_lists\_(NTSC)}{SmashBackroom (via SSBwiki)}
+  \item\href{https://rankedboost.com/ssb4-tier-list/}{RankedBoost}
+  \item\href{https://esports.htc.com/articles/esports-tier-list}{HTC eSports}
+  \item\href{https://www.ign.com/wikis/super-smash-bros-ultimate/Tier\_Lists}{And a collection of other tier lists (including lists made by professional players) published by IGN}
+ \end{itemize}
 
 \subsection{The Dataset}
  The data that we are using is the damage output of each character’s movesets. Each of the characters has roughly the same set of moves. This allows us to compare categories of attacks across the different characters. An important step in this comparison is to preprocess the data so that they are uniformly measurable. For example, some characters perform multiple successive attacks for the same player input. It is important to combine those attacks together so that it can be compared to another character with only one attack for that player input.
@@ -78,9 +81,8 @@ Actual Instance: Mario
 med, hybrid, good, 8, melee, 13, melee, 10, melee,12, melee, 11, melee, 17, melee, 19, melee, 17, melee, 12.5, melee, 13, melee, 13, melee, 10.5, melee,  4,  melee, 12, 26, 19, 19, 7, ranged, 7, ranged, 15, melee, 14, melee, B.
 Because the data is so rich in attributes and attribute values, we’ve attached a reference to our in-progress dataset  and the tier information to give you a better idea of what we’ve actually collected:
 \begin{itemize}
-  \item
-    Attributes: \\ \url{https://docs.google.com/spreadsheets/d/103elr0mhpr14yhiLLib4\_KinrFvMXrBGhfcc1fdAJjE/edit?usp=sharing}
-  \item Tiers: \\ \url{https://docs.google.com/spreadsheets/d/18\_zleVDd54rsXNylz \\ EztfFuTKHLIQ6wrmeXgQ1AGhSc/edit?usp=sharing}
+  \item\href{https://docs.google.com/spreadsheets/d/103elr0mhpr14yhiLLib4\_KinrFvMXrBGhfcc1fdAJjE/edit?usp=sharing}{Attributes}
+  \item\href{https://docs.google.com/spreadsheets/d/18\_zleVDd54rsXNylzEztfFuTKHLIQ6wrmeXgQ1AGhSc/edit?usp=sharing}{Tiers}
 \end{itemize}
 
 Note that, for most classification problems, having only 133 training instances with so many attributes for each instance would be problematic. However, the problem we’re solving is unique in that the universal set of instances is described in full with the 205 characters across all games (including Ultimate). And with how unique each character is, the more detail we can capture in each instance, the better. Thus the need for a somewhat larger set of attributes and possible attribute values.
@@ -91,6 +93,23 @@ Since there are many different machine learning models that each perform differe
 
 \subsection{Decision Tree}
 \subsection{KNN}
+\subsubsection{Algorithm}
+The K Nearest Neighbors algrithm works by colleting a group of data points as a kernel and then comparing new data points against those points to find its closest neighbors. Each new point's nearest K neighbors are found and then each of the output classes for those neighbors is given a vote that is scaled based on their distance from the new point. The largest vote wins.
+\subsubsection{Results}
+When KNN was run on the Super Smash Bros. dataset the accuracy was underwhelming with a best-acheived accuracy of 25\%. Different values of k were tested, and k=5 was found to be the best performing. However, although the accuracy was rather low, when the confusion matrix was evaluated it was discovered that the model was usually close to identifying the correct classification. Below is a chart showing the confusion matrix for the KNN model run on the dataset.
+\linebreak
+\begin{center}
+\begin{tabular}{c | c | c | c | c | c | c}
+   & S & A & B & C & D & F \\ \hline
+ S & 0 & 3 & 3 & 2 & 1 & 0 \\ \hline
+ A & 5 & 4 & 2 & 0 & 4 & 0 \\ \hline
+ B & 4 & 1 & 4 & 2 & 4 & 1 \\ \hline
+ C & 3 & 2 & 6 & 1 & 2 & 2 \\ \hline
+ D & 0 & 1 & 1 & 2 & 5 & 2 \\ \hline
+ F & 1 & 0 & 0 & 0 & 3 & 3 \\ \hline
+\end{tabular}
+\end{center}
+As can be seen in the chart above, the highest numbers are along the diagonal axis. This suggests that although the prediction was wrong, it was close to the correct classification. In further investigation it would be interesting to switch out KNN for RBF and compare the Mean Squared Error with other regression models.
 \subsection{K-Means}
 
 Because K-Means groups similar instances into clusters, it seemed like the oerfect model to create a group of character rankings.
