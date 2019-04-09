@@ -13,9 +13,10 @@
 % Use the postscript times font!
 \usepackage{times}
 \usepackage{hyperref}
+\usepackage{booktabs}
 
 % the following package is optional:
-%\usepackage{latexsym} 
+%\usepackage{latexsym}
 
 % Following comment is from ijcai97-submit.tex:
 % The preparation of these files was supported by Schlumberger Palo Alto
@@ -59,29 +60,30 @@ The bulk of our data is retrieved from the Super Smash Brothers wiki \url(www.ss
 For some of the attributes, we wanted to incorporate information that was not purely measurable in the game, such as character archetype. For this we had to rely on our own knowledge of the games and experiments conducted by our team members.
 Finally, we collected tier information and individual character rankings and tier lists from the following sources to use as potential class labels:
 \begin{itemize}
-  \item SmashBoards: https://smashboards.com/threads/4br-smash-for-wii-u-tier-list-v4.452109/ 
-  \item SmashBackroom (via SSBwiki): \url(https://www.ssbwiki.com/List\_of\_SSB4\_tier\_lists\_(NTSC))
-  \item RankedBoost: \url(https://rankedboost.com/ssb4-tier-list/)
-  \item HTC eSports: https://esports.htc.com/articles/esports-tier-list 
-  \item And a collection of other tier lists (including lists made by professional players) published by IGN: https://www.ign.com/wikis/super-smash-bros-ultimate/Tier\_Lists 
+  \item SmashBoards: \\ \url{https://smashboards.com/threads/4br-smash-for-wii-u-tier-list-v4.452109/}
+  \item SmashBackroom (via SSBwiki): \\ \url{https://www.ssbwiki.com/List\_of\_SSB4\_tier\_lists\_(NTSC)}
+  \item RankedBoost: \\ \url{https://rankedboost.com/ssb4-tier-list/}
+  \item HTC eSports: \\ \url{https://esports.htc.com/articles/esports-tier-list}
+  \item And a collection of other tier lists (including lists made by professional players) published by IGN: \\ \url{https://www.ign.com/wikis/super-smash-bros-ultimate/Tier\_Lists}
 \end{itemize}
 
 \subsection{The Dataset}
  The data that we are using is the damage output of each character’s movesets. Each of the characters has roughly the same set of moves. This allows us to compare categories of attacks across the different characters. An important step in this comparison is to preprocess the data so that they are uniformly measurable. For example, some characters perform multiple successive attacks for the same player input. It is important to combine those attacks together so that it can be compared to another character with only one attack for that player input.
-Our current dataset consists of 133 training instances, the rosters from games 1-4, with 42 attributes per instance, and one class label--the character’s predicted tier. The test set, comprised of the roster of Super Smash Brothers Ultimate, will contain 72 instances, for a combined total of 205 instances. There is a combination of continuous and nominal data. 
+Our current dataset consists of 133 training instances, the rosters from games 1-4, with 42 attributes per instance, and one class label--the character’s predicted tier. The test set, comprised of the roster of Super Smash Brothers Ultimate, will contain 72 instances, for a combined total of 205 instances. There is a combination of continuous and nominal data.
 The labels were created from standardizing the individually collected tier and ranking lists, averaging together the standardized scores for each instance, re-standardizing the averaged values to retain a standard deviation of one, and then finally discretizing the values into 6 even width bins to represent a universal standard tier list: S (Superior), A, B, C, D, and F.
 
-The 42 features are: 
-Weight (nominal), Archetype(nominal), Recovery(nominal), Jab(continuous), Jab Type(nominal), FTilt(continuous), FTilt Type(nominal), UTilt(continuous), UTilt Type(nominal), DTilt(continuous), DTilt Type(continuous), Dash Attack(continuous), Dash Attack Type(nominal), FSmash(continuous), FSmash Type(nominal), USmash(continuous), USmash Type(nominal), DSmash(continuous), DSmash Type(nominal), NAir(continuous), Nair Type(nominal), Fair(continuous), Fair Type(nominal), BAir(continuous), BAir Type(nominal), UAir(continuous), UAir Type(nominal), Dair(continuous), DAir type(nominal), FThrow(continuous), BThrow(continuous), UThrow(continuous), DThrow(continuous), NeutB(continuous), NeutB Type(nominal), SideB(continuous), SideB Type(nominal), UpB(continuous), UpB Type(nominal), DownB(continuous), DownB Type(nominal), Tier.    
-\linebreak
+The 42 features are Weight (nominal), Archetype (nominal), Recovery (nominal), Jab (continuous), Jab Type (nominal), FTilt (continuous), FTilt Type (nominal), UTilt (continuous), UTilt Type (nominal), DTilt (continuous), DTilt Type (continuous), Dash Attack (continuous), Dash Attack Type (nominal), FSmash (continuous), FSmash Type (nominal), USmash (continuous), USmash Type (nominal), DSmash (continuous), DSmash Type (nominal), NAir (continuous), Nair Type (nominal), Fair (continuous), Fair Type (nominal), BAir (continuous), BAir Type (nominal), UAir (continuous), UAir Type (nominal), Dair (continuous), DAir type (nominal), FThrow (continuous), BThrow (continuous), UThrow (continuous), DThrow (continuous), NeutB (continuous), NeutB Type (nominal), SideB (continuous), SideB Type (nominal), UpB (continuous), UpB Type (nominal), DownB (continuous), DownB Type (nominal), and Tier (nominal, class label).
+
 Actual Instance: Mario
 med, hybrid, good, 8, melee, 13, melee, 10, melee,12, melee, 11, melee, 17, melee, 19, melee, 17, melee, 12.5, melee, 13, melee, 13, melee, 10.5, melee,  4,  melee, 12, 26, 19, 19, 7, ranged, 7, ranged, 15, melee, 14, melee, B.
 Because the data is so rich in attributes and attribute values, we’ve attached a reference to our in-progress dataset  and the tier information to give you a better idea of what we’ve actually collected:
 \begin{itemize}
-  \item Attributes: \url(https://docs.google.com/spreadsheets/d/103elr0mhpr14yhiLLib4\_KinrFvMXrBGhfcc1fdAJjE/edit?usp=sharing)
-  \item Tiers: \url(https://docs.google.com/spreadsheets/d/18\_zleVDd54rsXNylzEztfFuTKHLIQ6wrmeXgQ1AGhSc/edit?usp=sharing)
+  \item
+    Attributes: \\ \url{https://docs.google.com/spreadsheets/d/103elr0mhpr14yhiLLib4\_KinrFvMXrBGhfcc1fdAJjE/edit?usp=sharing}
+  \item Tiers: \\ \url{https://docs.google.com/spreadsheets/d/18\_zleVDd54rsXNylz \\ EztfFuTKHLIQ6wrmeXgQ1AGhSc/edit?usp=sharing}
 \end{itemize}
-Note that, for most classification problems, having only 133 training instances with so many attributes for each instance would be problematic. However, the problem we’re solving is unique in that the universal set of instances is described in full with the 205 characters across all games (including Ultimate). And with how unique each character is, the more detail we can capture in each instance, the better. Thus the need for a somewhat larger set of attributes and possible attribute values. 
+
+Note that, for most classification problems, having only 133 training instances with so many attributes for each instance would be problematic. However, the problem we’re solving is unique in that the universal set of instances is described in full with the 205 characters across all games (including Ultimate). And with how unique each character is, the more detail we can capture in each instance, the better. Thus the need for a somewhat larger set of attributes and possible attribute values.
 
 \section{Methods}
 
@@ -115,11 +117,35 @@ k & Silhouette Score\\
 Surprisingly, our K-Means model performed poorly, as evident by the Silhouette scores close to zero.
 These low scores indicate a weak total clustering, and that most instances fell on the border of two clusters.
 
-\subsection{MLP}
+\subsection{Neural Network}
 
-The features used to solve the problem and details on how you
-gathered and represented the features, including critical
-decisions/choices made along the way
+The best performance we saw was achieved using a neural network with back-propagation. This was accomplished by performing a search over 9 different network topologies, outlined below:
+
+\begin{enumerate}
+    \item input-32-6
+    \item input-64-6
+    \item input-128-6
+    \item input-128-128-6
+    \item input-32-64-32-6
+    \item input-16-32-64-32-16-6
+    \item input-32-64-128-64-32-6
+    \item input-64-128-256-128-64-6
+    \item input-64-128-256-256-128-6
+\end{enumerate}
+
+ Each model utilized a learning rate of 1e-4, and a momentum of 0.99. On top of this, each model was initialized using xavier-normal initialization, with ReLU activations between hidden layers. Searches were not performed over these hyper parameters to save time, and were selected based on prior experience with neural networks. With each topology, we ran 3 tenfold cross validation trials on 3 different normalized versions of the training set and averaged the reported accuracy. For each training fold, early stopping was performed using an 80/20 validation split, stopping based on the best observed validation MSE. Training stopped when no improvements were observed after 20 epochs.
+
+Here are the results:
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+The trends show that the best topologies proved to be ones that had more layers and hidden nodes, with topology 9 training on the full 44 attributes performing best overall in the end.
+
 
 
 \section{Initial Results}
@@ -129,22 +155,51 @@ The iterative steps you took to get better results (improved features and/or lea
 
 \section{Final Results}
 
-Clear reporting and explanation of your final results including your training/testing approach
+% Clear reporting and explanation of your final results including % your training/testing approach.
+The input-64-128-256-128-6 neural network was trained on the full training split (All character data from games 1-4), then applied to the test split (the latest game, Smash Ultimate) across 10 trials to get a general sense of performance before identifying the actual classifications made by the neural network. The results are shown below.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{}
+    \caption{Our best model's predicted tiers for the game compared with the crowd-sourced tier list. Note how on some characters where the ranks differ, they differ by only one letter grade, where others differing classifications vary greatly.}
+    \label{fig:my_label}
+\end{figure}
+
+Despite the complexity of this model and the relatively small dataset, the model’s good performance on both initial cross-validation and the final test set proves the model’s generalizability.
+
+Below are the final results of characters and their crowd-sourced and predicted classifications, in which the model agreed with the still-developing tier list of Smash Ultimate about 80\% of the time:
+
 
 \section{Conclusions}
 
-Conclusions, insights
+Having a neural network outperform all other algorithms confirmed something interesting about the nature of the series’ character data. The data required a model capable of learning extremely high-order features in order to generalize well. In other words, what makes a character “good” or “bad” is very complex. This falls in line with the consensus of the series’ competitive community: Besides the high degree of variation among each character’s moves and raw damage output, there is an interplay between a character’s play-style and other minor attributes which is hard to quantify. Perhaps the most accurate observations are made as one plays the game; one describes how a character “feels” rather than singling out an attribute or set of attributes that identify an overall best character. As such, this model is better interpreted as a single opinion of the characters rather than an improvement over the crowd-sourced classifications.
+
 
 \section{Future Work}
 
 As our primary difficulty in solving this problem was our data, it would be worthwhile to spend more time on refining our dataset.
 It is possible that including more detailed data, such as launch and frame data for each attack, would produce more accurate results.
+
 Another possible improvement would be the use of different models.
-Ensembles of different learning models or of the same learning models with different hyperparameters might produce more accurate results.
-Deep learning might be able to learn the complicated, higher-order relations between character attack types and damage, as well as how raw data,
-such as speed and weight, affect a character's ranking.
+Ensembles of different learning models or of the same learning models with different hyper parameters might produce more accurate results. Employing residual connections in our deep neural network might further improve the accuracy of our model and lead to more decisive tier classifications for Smash Ultimate.
 
 \appendix
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{}
+    \caption{The set of attributes comprising the full dataset.}
+    \label{fig:my_label}
+\end{figure}
+
+% To be thorough.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{}
+    \caption{Different variations of the dataset used in our trials with the different models.}
+    \label{fig:my_label}
+\end{figure}
+
 
 \begin{thebibliography}{1}
 \bibitem{SmashWiki}
@@ -152,4 +207,3 @@ such as speed and weight, affect a character's ranking.
 \end{thebibliography}
 
 \end{document}
-
