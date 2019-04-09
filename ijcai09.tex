@@ -93,6 +93,23 @@ Since there are many different machine learning models that each perform differe
 
 \subsection{Decision Tree}
 \subsection{KNN}
+\subsubsection{Algorithm}
+The K Nearest Neighbors algrithm works by colleting a group of data points as a kernel and then comparing new data points against those points to find its closest neighbors. Each new point's nearest K neighbors are found and then each of the output classes for those neighbors is given a vote that is scaled based on their distance from the new point. The largest vote wins.
+\subsubsection{Results}
+When KNN was run on the Super Smash Bros. dataset the accuracy was underwhelming with a best-acheived accuracy of 25\%. Different values of k were tested, and k=5 was found to be the best performing. However, although the accuracy was rather low, when the confusion matrix was evaluated it was discovered that the model was usually close to identifying the correct classification. Below is a chart showing the confusion matrix for the KNN model run on the dataset.
+\linebreak
+\begin{center}
+\begin{tabular}{c | c | c | c | c | c | c}
+   & S & A & B & C & D & F \\ \hline
+ S & 0 & 3 & 3 & 2 & 1 & 0 \\ \hline
+ A & 5 & 4 & 2 & 0 & 4 & 0 \\ \hline
+ B & 4 & 1 & 4 & 2 & 4 & 1 \\ \hline
+ C & 3 & 2 & 6 & 1 & 2 & 2 \\ \hline
+ D & 0 & 1 & 1 & 2 & 5 & 2 \\ \hline
+ F & 1 & 0 & 0 & 0 & 3 & 3 \\ \hline
+\end{tabular}
+\end{center}
+As can be seen in the chart above, the highest numbers are along the diagonal axis. This suggests that although the prediction was wrong, it was close to the correct classification. In further investigation it would be interesting to switch out KNN for RBF and compare the Mean Squared Error with other regression models.
 \subsection{K-Means}
 
 Because K-Means groups similar instances into clusters, it seemed like the oerfect model to create a group of character rankings.
